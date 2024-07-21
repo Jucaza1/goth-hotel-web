@@ -1,0 +1,19 @@
+package home
+
+import "github.com/Jucaza1/goth-hotel-web/view/layout"
+import "github.com/Jucaza1/goth-hotel-web/view/components"
+
+templ Show(texts []string, items []string) {
+	@layout.Base("Home") {
+		@components.Card_center(texts) {
+			@components.Button_2("/") {
+				Book Now
+			}
+			@components.Button_1("/") {
+				Learn More
+			}
+		}
+		@components.Carousel_1(items[:6], false)
+		@components.Carousel_1(items[6:], true)
+	}
+}

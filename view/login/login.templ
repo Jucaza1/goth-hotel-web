@@ -1,0 +1,96 @@
+package login
+
+import "github.com/Jucaza1/goth-hotel-web/view/layout"
+import "fmt"
+
+templ Show(server string) {
+	@layout.Base("Login") {
+		<form
+			id="loginForm"
+			class="flex flex-col max-w-sm mx-auto my-10 content-center"
+			hx-post={ fmt.Sprintf("%s%s", server, "/api/auth") }
+			hx-headers='{"Content-Type": "application/json"}'
+			hx-target="#response"
+		>
+			<div class="size-40 my-10 mx-auto overflow-hidden object-scale-down"><img class="h-full" src="/public/img/utils/profile.svg" alt="profile"/></div>
+			<div class="mb-5">
+				<label for="emailInput" class="block mb-2 text-sm font-medium text-gray-900 ">
+					Your email
+				</label>
+				<input type="email" name="email" id="emailInput" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " placeholder="example@mail.com" required/>
+			</div>
+			<div class="mb-5">
+				<label for="passwordInput" class="block mb-2 text-sm font-medium text-gray-900 ">
+					Your password
+				</label>
+				<input type="password" name="password" id="passwordInput" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required/>
+			</div>
+			<span for="register" class="ms-2 text-sm font-medium text-gray-900 ">
+				New here? 
+				<a href="/register" class="text-blue-600 hover:underline ">
+					Create an account
+				</a>
+			</span>
+			<button
+				class="my-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+			>Submit </button>
+			<img id="spinner" class="htmx-indicator h-10 w-10 self-center" src="/public/img/utils/spinner_1.svg"/>
+		</form>
+		<div id="response"></div>
+		<script>
+		const getEmail = ()=>{
+			emailInput = document.getElementById("emailInput")
+			console.log(emailInput.value)
+			return emailInput.value
+		}
+		const getPassword = ()=>{
+			passwordInput = document.getElementById("passwordInput")
+			console.log(passwordInput.value)
+			return passwordInput.value
+		}
+
+		document.body.addEventListener("htmx:beforeRequest",(e)=>{
+			
+			const xhr = e.detail.xhr;
+            const form = document.querySelector('#loginForm');
+            const formData = new FormData(form);
+
+            let json = {}
+            formData.forEach((value, key) => {
+                json[key] = value
+            })
+            const jsonString = JSON.stringify(json)
+			xhr.open()
+            xhr.send(jsonString)
+
+            
+		})
+
+		document.body.addEventListener("htmx:configRequest",(e)=>{
+			const h = e.detail.headers
+			h['Content-Type']='application/json'
+			console.log(h)
+			
+		})
+
+		document.body.addEventListener("htmx:responseError",(e)=>{
+			console.log("htmx:responseError")
+			const inputs = [document.getElementById("emailInput"),document.getElementById("passwordInput")]
+			inputs.forEach(input =>{
+				input.style.outline= 'none !important'
+				input.style.border='1px solid red'
+				input.style.boxShadow='0 0 10px #719ECE'
+			})
+			if(document.getElementById("errorMsg")!=undefined){
+				return
+			}
+			const errorMsg = document.createElement('span')
+			errorMsg.id="errorMsg"
+			errorMsg.textContent = "incorrect credentials"
+			errorMsg.style.color = "red"
+			errorMsg.style.fontSize = "12px"
+			inputs[1].insertAdjacentElement('afterend',errorMsg)
+		})
+		</script>
+	}
+}

@@ -1,0 +1,10 @@
+<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><script src=\"https://unpkg.com/htmx.org@1.9.12\" integrity=\"sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2\" crossorigin=\"anonymous\"></script><link rel=\"stylesheet\" src=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css\"><link rel=\"stylesheet\" href=\"/public/css/style.css\"><link rel=\"stylesheet\" href=\"/public/css/secondary.css\"><title>
+</title></head><body class=\"bg-gray-300\"><header class=\"bg-red-800 w-full py-3 flex justify-center\"><div class=\" w-full py-3 mx-10 flex justify-between max-w-7xl\"><a href=\"/\"><span class=\"sr-only\">Hotels</span> <img class=\"h-10 w-auto\" src=\"/public/img/H_icon.png\" alt=\"\"></a><nav class=\"mx-auto flex items-center justify-between  lg:px-8\" aria-label=\"Global\"><ul class=\"flex content-center gap-9 w-full\">
+Hotels
+Rooms
+User
+About 
+</ul></nav>
+Log in
+</div></header>
+</body></html>

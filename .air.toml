@@ -1,0 +1,51 @@
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  bin = "./tmp/main.exe"
+# pre_cmd = ["templ generate && npx tailwindcss -i view/css/app.css -o public/css/style.css"]
+  cmd = "go build -tags=dev -o ./tmp/main.exe ./cmd/app_v1"
+  post_cmd = []
+
+  delay = 50
+  exclude_dir = ["assets", "tmp", "vendor", "testdata"]
+  exclude_file = []
+  exclude_regex = ["_test.go"]  
+  exclude_unchanged = false
+  follow_symlink = false
+  full_bin = "./tmp/main.exe"
+  include_dir = ["cmd/app_v1","view"]
+  include_ext = ["go", "templ", "html"]
+  include_file = ["public/css/style.css"]
+  kill_delay = "0s"
+  log = "build-errors.log"
+  poll = false
+  poll_interval = 0
+  
+  rerun = false
+  rerun_delay = 500
+  send_interrupt = false
+  stop_on_error = true
+
+[color]
+  app = ""
+  build = "yellow"
+  main = "magenta"
+  runner = "green"
+  watcher = "cyan"
+
+[log]
+  main_only = false
+  time = false
+
+[misc]
+  clean_on_exit = false
+
+# [proxy]
+#   enabled = true
+#   proxy_port = 1234
+#   app_port = 3000
+
+[screen]
+  clear_on_rebuild = false
+  keep_scroll = true

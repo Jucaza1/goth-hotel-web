@@ -1,0 +1,28 @@
+package components
+
+templ Carousel_1(items []string, reverse bool) {
+	<div class="slider before:h-[200px] before:w-[150px] before:absolute before:bg-gradient-to-r before:from-gray-300 before:to-transparent before:z-10 after:h-[200px] after:w-[150px] after:absolute after:bg-gradient-to-r after:from-gray-300 after:to-transparent after:z-10">
+		if !reverse {
+			<div class="slide-track">
+				for i:=0;i<2*len(items);i++ {
+					<div class="slide">
+						<img class="object-fill w-full h-full" src={ items[i%len(items)] } alt=""/>
+					</div>
+				}
+			</div>
+		} else {
+			<div class="slide-track-reverse">
+				for i:=0;i<2*len(items);i++ {
+					<div class="slide">
+						<img class="object-fill w-full h-full" src={ items[i%len(items)] } alt=""/>
+					</div>
+				}
+			</div>
+		}
+	</div>
+	// <div>
+	// 	for _,item:= range items {
+	// 		<img src={ item } alt=""/>
+	// 	}
+	// </div>
+}

@@ -1,0 +1,10 @@
+<div class=\"slider before:h-[200px] before:w-[150px] before:absolute before:bg-gradient-to-r before:from-gray-300 before:to-transparent before:z-10 after:h-[200px] after:w-[150px] after:absolute after:bg-gradient-to-r after:from-gray-300 after:to-transparent after:z-10\">
+<div class=\"slide-track\">
+<div class=\"slide\"><img class=\"object-fill w-full h-full\" src=\"
+\" alt=\"\"></div>
+</div>
+<div class=\"slide-track-reverse\">
+<div class=\"slide\"><img class=\"object-fill w-full h-full\" src=\"
+\" alt=\"\"></div>
+</div>
+</div>

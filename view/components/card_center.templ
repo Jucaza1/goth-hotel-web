@@ -1,0 +1,13 @@
+package components
+
+templ Card_center(texts []string) {
+	<section class="flex flex-col items-center mx-auto my-14">
+		<h3 class="mb-2 text-3xl font-bold tracking-tight text-gray-900 ">{ texts[0] }</h3>
+		for _, text:= range texts[1:] {
+			<p class="font-normal text-gray-800 ">{ text }</p>
+		}
+		<div class="my-5 flex gap-5">
+			{ children... }
+		</div>
+	</section>
+}
