@@ -1,4 +1,5 @@
-#DEV -> open 3 shells
+## Project not finished yet.
+## DEV -> open 3 shells
 
 ```
 make css-watch
