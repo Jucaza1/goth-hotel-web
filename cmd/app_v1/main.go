@@ -7,13 +7,19 @@ import (
 
 	"github.com/Jucaza1/goth-hotel-web/handler"
 	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
 	//const server = "http://localhost:4000"
-	const server = "http://localhost:3000/echo"
+	const server = "http://127.0.0.1:3000/echo"
 
 	app := echo.New()
+	app.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+        AllowOrigins: []string{"http://localhost:3000", "http://localhost:7331","http://127.0.0.1:3000","http://127.0.0.1:7331"},
+        // AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
+		AllowMethods: []string{http.MethodGet, http.MethodPut, http.MethodPost, http.MethodDelete},
+	}))
 	app.HTTPErrorHandler = handler.ErrorHandler
 	userHandler := handler.NewUserHandler(server)
 	homeHandler := handler.NewHomeHandler(server)
@@ -42,7 +48,7 @@ func main() {
 		// Set the response content type to the same as the request content type
 		c.Response().Header().Set(echo.HeaderContentType, c.Request().Header.Get(echo.HeaderContentType))
 
-		return c.String(http.StatusBadRequest, response)
+		return c.String(http.StatusOK, response)
 	})
 
 	log.Panic(app.Start(":3000"))
