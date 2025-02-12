@@ -2,3 +2,5 @@ tmp/*
 *.exe
 *.exe~
 *txt
+*_templ.go
+public/css/style.css

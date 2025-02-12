@@ -1,7 +1,9 @@
 package login
 
-import "github.com/Jucaza1/goth-hotel-web/view/layout"
-import "fmt"
+import (
+	"fmt"
+	"github.com/Jucaza1/goth-hotel-web/view/layout"
+)
 
 templ Show(server string) {
 	@layout.Base("Login") {
@@ -26,7 +28,7 @@ templ Show(server string) {
 				<input type="password" name="password" id="passwordInput" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " required/>
 			</div>
 			<span for="register" class="ms-2 text-sm font-medium text-gray-900 ">
-				New here? 
+				New here?
 				<a href="/register" class="text-blue-600 hover:underline ">
 					Create an account
 				</a>
@@ -50,7 +52,7 @@ templ Show(server string) {
 		}
 
 		document.body.addEventListener("htmx:beforeRequest",(e)=>{
-			
+            e.preventDefault()
 			const xhr = e.detail.xhr;
             const form = document.querySelector('#loginForm');
             const formData = new FormData(form);
@@ -59,18 +61,19 @@ templ Show(server string) {
             formData.forEach((value, key) => {
                 json[key] = value
             })
+            const server = document.getElementById("loginForm").getAttribute("hx-post")
+            console.log( server )
             const jsonString = JSON.stringify(json)
-			xhr.open()
+			// xhr.open("POST",  server  )
+            // xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send(jsonString)
-
-            
 		})
 
 		document.body.addEventListener("htmx:configRequest",(e)=>{
 			const h = e.detail.headers
 			h['Content-Type']='application/json'
 			console.log(h)
-			
+
 		})
 
 		document.body.addEventListener("htmx:responseError",(e)=>{

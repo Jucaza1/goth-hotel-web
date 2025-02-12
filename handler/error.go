@@ -12,9 +12,10 @@ func ErrorHandler(err error, c echo.Context) {
 	if he, ok := err.(*echo.HTTPError); ok {
 		code = he.Code
 	}
-	c.Logger().Error(err)
-	errorPage := fmt.Sprintf("public/html/%d.html", code)
+	errorPage := fmt.Sprintf("public/HTML/%d.html", code)
 	if err := c.File(errorPage); err != nil {
 		c.Logger().Error(err)
+        return
 	}
+	c.Logger().Error(err)
 }
